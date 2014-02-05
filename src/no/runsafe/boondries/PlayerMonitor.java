@@ -30,8 +30,7 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove
 	public boolean OnPlayerMove(IPlayer player, ILocation from, ILocation to)
 	{
 		String playerName = player.getName();
-		if (!flaggedPlayers.contains(playerName))
-			if (handler.isPastBoundary(to))
+		if (!flaggedPlayers.contains(playerName) && !player.isDead() && handler.isPastBoundary(to))
 				flagPlayer(player);
 
 		return true;
