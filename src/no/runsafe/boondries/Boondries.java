@@ -15,5 +15,6 @@ public class Boondries extends RunsafeConfigurablePlugin
 
 		// Plugin components
 		addComponent(BoundsHandler.class);
+		addComponent(PlayerMonitor.class);
 	}
 }
