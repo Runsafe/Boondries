@@ -2,7 +2,6 @@ package no.runsafe.boondries;
 
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
-import no.runsafe.framework.api.IServer;
 import no.runsafe.framework.api.IWorld;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.filesystem.IPluginDataFile;
@@ -17,9 +16,8 @@ import java.util.List;
 
 public class BoundsHandler implements IConfigurationChanged
 {
-	public BoundsHandler(IPluginFileManager fileManager, IServer server, IConsole console)
+	public BoundsHandler(IPluginFileManager fileManager, IConsole console)
 	{
-		this.server = server;
 		this.console = console;
 		this.boundsFile = fileManager.getFile("bounds.txt");
 	}
@@ -41,8 +39,7 @@ public class BoundsHandler implements IConfigurationChanged
 
 			boundaries.get(worldName).add(new Boundary(
 					Integer.parseInt(data[1]),
-					Integer.parseInt(data[2]),
-					server.getWorld(worldName)
+					Integer.parseInt(data[2])
 			));
 			boundaryCount++;
 		}
@@ -72,7 +69,6 @@ public class BoundsHandler implements IConfigurationChanged
 	}
 
 	private final HashMap<String, List<Boundary>> boundaries = new HashMap<String, List<Boundary>>(0);
-	private final IServer server;
 	private final IConsole console;
 	private final IPluginDataFile boundsFile;
 }

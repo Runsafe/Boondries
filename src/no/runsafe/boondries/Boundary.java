@@ -4,11 +4,10 @@ import no.runsafe.framework.api.IWorld;
 
 public class Boundary
 {
-	public Boundary(int lowPosition, int highPosition, IWorld world)
+	public Boundary(int lowPosition, int highPosition)
 	{
 		this.lowPosition = lowPosition;
 		this.highPosition = highPosition;
-		this.world = world;
 	}
 
 	public int getLowPosition()
@@ -23,5 +22,4 @@ public class Boundary
 
 	private final int lowPosition;
 	private final int highPosition;
-	private final IWorld world;
 }
