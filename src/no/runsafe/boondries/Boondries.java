@@ -1,26 +1,19 @@
 package no.runsafe.boondries;
 
-import no.runsafe.framework.RunsafePlugin;
+import no.runsafe.framework.RunsafeConfigurablePlugin;
+import no.runsafe.framework.features.Commands;
+import no.runsafe.framework.features.Events;
 
-public class Boondries extends RunsafePlugin
-//public class Boondries extends RunsafeConfigurablePlugin
+public class Boondries extends RunsafeConfigurablePlugin
 {
-//	public static IDebug Debugger = null;
-
 	@Override
 	protected void pluginSetup()
 	{
-//		Debugger = getComponent(IDebug.class);
-
 		// Framework features
-//		addComponent(Commands.class);
-//		addComponent(Database.class);
-//		addComponent(Events.class);
-//		addComponent(FrameworkHooks.class);
-//		addComponent(LUAScripts.class);
-//		addComponent(UniverseRegistration.class);
+		addComponent(Commands.class);
+		addComponent(Events.class);
 
 		// Plugin components
-//		addComponent(SomeComponent.class);
+		addComponent(BoundsHandler.class);
 	}
 }
