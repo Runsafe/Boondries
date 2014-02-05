@@ -27,6 +27,8 @@ public class BoundsHandler implements IConfigurationChanged
 
 		for (Map.Entry<String, Map<String, String>> node : section.entrySet())
 		{
+			console.logInformation(node.getKey());
+			console.logInformation("Size: " + node.getValue().size());
 			Map<String, String> map = node.getValue();
 			String worldName = map.get("world");
 
