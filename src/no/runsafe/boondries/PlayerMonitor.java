@@ -32,6 +32,9 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 	@Override
 	public boolean OnPlayerMove(IPlayer player, ILocation from, ILocation to)
 	{
+		if (handler.isImmune(player))
+			return true;
+
 		String playerName = player.getName();
 		if (!flaggedPlayers.contains(playerName) && !player.isDead() && handler.isPastBoundary(to))
 				flagPlayer(player);
@@ -61,18 +64,18 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 	@Override
 	public boolean OnBlockBreak(IPlayer player, IBlock block)
 	{
-		return handleBlockAction(block);
+		return handleBlockAction(player, block);
 	}
 
 	@Override
 	public boolean OnBlockPlace(IPlayer player, IBlock block)
 	{
-		return handleBlockAction(block);
+		return handleBlockAction(player, block);
 	}
 
-	private boolean handleBlockAction(IBlock block)
+	private boolean handleBlockAction(IPlayer player, IBlock block)
 	{
-		return !handler.isPastBoundary(block.getLocation());
+		return handler.isImmune(player) || !handler.isPastBoundary(block.getLocation());
 	}
 
 	private int killTimer;

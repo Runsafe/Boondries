@@ -7,6 +7,7 @@ import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.filesystem.IPluginDataFile;
 import no.runsafe.framework.api.filesystem.IPluginFileManager;
 import no.runsafe.framework.api.log.IConsole;
+import no.runsafe.framework.api.player.IPlayer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +70,28 @@ public class BoundsHandler implements IConfigurationChanged
 		return false;
 	}
 
+	public boolean toggleImmune(IPlayer player)
+	{
+		String playerName = player.getName();
+		if (immunePlayers.contains(playerName))
+		{
+			immunePlayers.remove(playerName);
+			return false;
+		}
+		else
+		{
+			immunePlayers.add(playerName);
+			return true;
+		}
+	}
+
+	public boolean isImmune(IPlayer player)
+	{
+		return immunePlayers.contains(player.getName());
+	}
+
 	private final HashMap<String, List<Boundary>> boundaries = new HashMap<String, List<Boundary>>(0);
 	private final IConsole console;
 	private final IPluginDataFile boundsFile;
+	private final List<String> immunePlayers = new ArrayList<String>(0);
 }
