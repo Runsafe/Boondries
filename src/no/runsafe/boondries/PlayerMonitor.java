@@ -3,6 +3,9 @@ package no.runsafe.boondries;
 import no.runsafe.framework.api.IConfiguration;
 import no.runsafe.framework.api.ILocation;
 import no.runsafe.framework.api.IScheduler;
+import no.runsafe.framework.api.block.IBlock;
+import no.runsafe.framework.api.event.block.IBlockBreak;
+import no.runsafe.framework.api.event.block.IBlockPlace;
 import no.runsafe.framework.api.event.player.IPlayerMove;
 import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.log.IConsole;
@@ -11,7 +14,7 @@ import no.runsafe.framework.api.player.IPlayer;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerMonitor implements IConfigurationChanged, IPlayerMove
+public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlockBreak, IBlockPlace
 {
 	public PlayerMonitor(BoundsHandler handler, IConsole console, IScheduler scheduler)
 	{
@@ -53,6 +56,23 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove
 				flaggedPlayers.remove(player.getName());
 			}
 		}, killTimer);
+	}
+
+	@Override
+	public boolean OnBlockBreak(IPlayer player, IBlock block)
+	{
+		return handleBlockAction(block);
+	}
+
+	@Override
+	public boolean OnBlockPlace(IPlayer player, IBlock block)
+	{
+		return handleBlockAction(block);
+	}
+
+	private boolean handleBlockAction(IBlock block)
+	{
+		return !handler.isPastBoundary(block.getLocation());
 	}
 
 	private int killTimer;
