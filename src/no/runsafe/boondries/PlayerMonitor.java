@@ -43,7 +43,7 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 	{
 		String playerName = player.getName();
 		flaggedPlayers.add(playerName);
-		player.sendColouredMessage("&4You have travelled too far, turn back now or you will be terminated!");
+		player.sendColouredMessage("&4You have travelled too far, turn back now or you will die!");
 		console.logWarning("Player %s has passed a boundary, preparing to terminate in %s seconds.", playerName, killTimer);
 		scheduler.startSyncTask(new Runnable()
 		{
