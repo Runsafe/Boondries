@@ -49,10 +49,9 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove
 			public void run()
 			{
 				if (handler.isPastBoundary(player.getLocation()))
-				{
 					player.damage(500D); // Die, potato!
-					flaggedPlayers.remove(player.getName());
-				}
+
+				flaggedPlayers.remove(player.getName());
 			}
 		}, killTimer);
 	}
