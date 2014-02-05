@@ -1,5 +1,0 @@
-zones:
-  - survival:
-    low: -100000
-    high: 100000
-    world: world
