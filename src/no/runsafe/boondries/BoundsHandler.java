@@ -7,7 +7,6 @@ import no.runsafe.framework.api.event.plugin.IConfigurationChanged;
 import no.runsafe.framework.api.filesystem.IPluginDataFile;
 import no.runsafe.framework.api.filesystem.IPluginFileManager;
 import no.runsafe.framework.api.log.IConsole;
-import sun.util.resources.TimeZoneNames_zh_CN;
 
 import java.util.ArrayList;
 import java.util.Collections;
