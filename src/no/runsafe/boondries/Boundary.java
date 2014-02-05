@@ -1,7 +1,5 @@
 package no.runsafe.boondries;
 
-import no.runsafe.framework.api.IWorld;
-
 public class Boundary
 {
 	public Boundary(int lowPosition, int highPosition)
