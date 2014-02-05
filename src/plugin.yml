@@ -1,10 +1,8 @@
 name: Boondries
 main: no.runsafe.boondries.Boondries
 version: 1.0.@BUILD@
-authors: []
-depend: []
-description:
+author: Kruithne
+description: World boundaries!
 commands:
-  something:
-    description:
-    aliases: []
+  boundaryimmune:
+    description: Makes a user immune to world boundaries.
