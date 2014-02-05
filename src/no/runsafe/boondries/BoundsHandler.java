@@ -29,7 +29,7 @@ public class BoundsHandler implements IConfigurationChanged
 
 		for (String boundLine : boundsFile.getLines())
 		{
-			// Line format: world,lowX,highX
+			// Line format: world,lowX,highX,maxHeight
 			String[] data = boundLine.split(",");
 			String worldName = data[0];
 
@@ -38,7 +38,8 @@ public class BoundsHandler implements IConfigurationChanged
 
 			boundaries.get(worldName).add(new Boundary(
 					Integer.parseInt(data[1]),
-					Integer.parseInt(data[2])
+					Integer.parseInt(data[2]),
+					Integer.parseInt(data[3])
 			));
 			boundaryCount++;
 		}
@@ -61,7 +62,8 @@ public class BoundsHandler implements IConfigurationChanged
 		if (!bounds.isEmpty())
 			for (Boundary boundary : bounds)
 				if (location.getX() > boundary.getHighPosition() || location.getZ() > boundary.getHighPosition() ||
-					location.getX() < boundary.getLowPosition() || location.getZ() < boundary.getLowPosition())
+					location.getX() < boundary.getLowPosition() || location.getZ() < boundary.getLowPosition() ||
+					location.getY() > boundary.getMaxHeight())
 					return true;
 
 		return false;
