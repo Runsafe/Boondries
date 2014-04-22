@@ -70,28 +70,12 @@ public class BoundsHandler implements IConfigurationChanged
 		return false;
 	}
 
-	public boolean toggleImmune(IPlayer player)
-	{
-		String playerName = player.getName();
-		if (immunePlayers.contains(playerName))
-		{
-			immunePlayers.remove(playerName);
-			return false;
-		}
-		else
-		{
-			immunePlayers.add(playerName);
-			return true;
-		}
-	}
-
 	public boolean isImmune(IPlayer player)
 	{
-		return immunePlayers.contains(player.getName());
+		return player.hasPermission("runsafe.boondries.immune");
 	}
 
 	private final HashMap<String, List<Boundary>> boundaries = new HashMap<String, List<Boundary>>(0);
 	private final IConsole console;
 	private final IPluginDataFile boundsFile;
-	private final List<String> immunePlayers = new ArrayList<String>(0);
 }

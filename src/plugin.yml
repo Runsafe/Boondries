@@ -3,6 +3,3 @@ main: no.runsafe.boondries.Boondries
 version: 1.0.@BUILD@
 author: Kruithne
 description: World boundaries!
-commands:
-  boundaryimmune:
-    description: Makes a user immune to world boundaries.
