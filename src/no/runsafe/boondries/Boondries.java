@@ -1,6 +1,5 @@
 package no.runsafe.boondries;
 
-import no.runsafe.boondries.commands.BoundaryImmune;
 import no.runsafe.framework.RunsafeConfigurablePlugin;
 import no.runsafe.framework.features.Commands;
 import no.runsafe.framework.features.Events;
@@ -17,8 +16,5 @@ public class Boondries extends RunsafeConfigurablePlugin
 		// Plugin components
 		addComponent(BoundsHandler.class);
 		addComponent(PlayerMonitor.class);
-
-		// Commands
-		addComponent(BoundaryImmune.class);
 	}
 }
