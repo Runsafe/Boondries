@@ -13,6 +13,7 @@ import no.runsafe.framework.api.player.IPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlockBreak, IBlockPlace
 {
@@ -35,8 +36,7 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 		if (handler.isImmune(player))
 			return true;
 
-		String playerName = player.getName();
-		if (!flaggedPlayers.contains(playerName) && !player.isDead() && handler.isPastBoundary(to))
+		if (!flaggedPlayers.contains(player.getUniqueId()) && !player.isDead() && handler.isPastBoundary(to))
 				flagPlayer(player);
 
 		return true;
@@ -44,10 +44,10 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 
 	private void flagPlayer(final IPlayer player)
 	{
-		String playerName = player.getName();
-		flaggedPlayers.add(playerName);
+		final UUID playerUIID = player.getUniqueId();
+		flaggedPlayers.add(playerUIID);
 		player.sendColouredMessage("&4You have travelled too far, turn back now or you will die!");
-		console.logWarning("Player %s has passed a boundary, preparing to terminate in %s seconds.", playerName, killTimer);
+		console.logWarning("Player %s has passed a boundary, preparing to terminate in %s seconds.", player.getName(), killTimer);
 		scheduler.startSyncTask(new Runnable()
 		{
 			@Override
@@ -56,7 +56,7 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 				if (handler.isPastBoundary(player.getLocation()))
 					player.damage(500D); // Die, potato!
 
-				flaggedPlayers.remove(player.getName());
+				flaggedPlayers.remove(playerUIID);
 			}
 		}, killTimer);
 	}
@@ -80,7 +80,7 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 
 	private int killTimer;
 	private final BoundsHandler handler;
-	private final List<String> flaggedPlayers = new ArrayList<String>(0);
+	private final List<UUID> flaggedPlayers = new ArrayList<UUID>(0);
 	private final IConsole console;
 	private final IScheduler scheduler;
 }
