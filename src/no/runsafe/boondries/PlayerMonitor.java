@@ -48,16 +48,12 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 		flaggedPlayers.add(playerUIID);
 		player.sendColouredMessage("&4You have travelled too far, turn back now or you will die!");
 		console.logWarning("Player %s has passed a boundary, preparing to terminate in %s seconds.", player.getName(), killTimer);
-		scheduler.startSyncTask(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				if (handler.isPastBoundary(player.getLocation()))
-					player.damage(500D); // Die, potato!
+		scheduler.startSyncTask(() -> {
+			ILocation location = player.getLocation();
+			if (location != null && handler.isPastBoundary(location))
+				player.damage(500D); // Die, potato!
 
-				flaggedPlayers.remove(playerUIID);
-			}
+			flaggedPlayers.remove(playerUIID);
 		}, killTimer);
 	}
 
@@ -80,7 +76,7 @@ public class PlayerMonitor implements IConfigurationChanged, IPlayerMove, IBlock
 
 	private int killTimer;
 	private final BoundsHandler handler;
-	private final List<UUID> flaggedPlayers = new ArrayList<UUID>(0);
+	private final List<UUID> flaggedPlayers = new ArrayList<>(0);
 	private final IConsole console;
 	private final IScheduler scheduler;
 }

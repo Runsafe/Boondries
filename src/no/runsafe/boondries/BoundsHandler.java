@@ -35,7 +35,7 @@ public class BoundsHandler implements IConfigurationChanged
 			String worldName = data[0];
 
 			if (!boundaries.containsKey(worldName))
-				boundaries.put(worldName, new ArrayList<Boundary>(1));
+				boundaries.put(worldName, new ArrayList<>(1));
 
 			boundaries.get(worldName).add(new Boundary(
 					Integer.parseInt(data[1]),
@@ -75,7 +75,7 @@ public class BoundsHandler implements IConfigurationChanged
 		return player.hasPermission("runsafe.boondries.immune");
 	}
 
-	private final HashMap<String, List<Boundary>> boundaries = new HashMap<String, List<Boundary>>(0);
+	private final HashMap<String, List<Boundary>> boundaries = new HashMap<>(0);
 	private final IConsole console;
 	private final IPluginDataFile boundsFile;
 }
